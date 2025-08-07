@@ -178,7 +178,7 @@ def get_recognizer(recog_network, network_params, character,\
             except:
                 pass
     else:
-        model = torch.nn.DataParallel(model).to(device)
+        model = torch.nn.DataParallel(model, device_ids=[torch.device(device)]).to(device)
         model.load_state_dict(torch.load(model_path, map_location=device, weights_only=False))
 
     return model, converter
